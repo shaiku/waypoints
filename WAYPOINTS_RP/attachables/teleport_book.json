@@ -1,0 +1,33 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:attachable": {
+    "description": {
+      "identifier": "chetty:waypoint_book",
+      "materials": {
+        "default": "spider",
+        "enchanted": "entity_alphatest_glint"
+      },
+      "textures": {
+        "default": "textures/items/teleport_book"
+      },
+      "geometry": {
+        "default": "geometry.teleport.book"
+      },
+      "animations": {
+        "main_hand": "animation.teleport_book.idle",
+        "wield_first_person": "animation.teleport_book.first_person_wield"
+      },
+      "scripts": {
+        "animate": [
+          "main_hand",
+          {
+            "wield_first_person": "c.is_first_person"
+          }
+        ]
+      },
+      "render_controllers": [
+        "controller.render.default"
+      ]
+    }
+  }
+}

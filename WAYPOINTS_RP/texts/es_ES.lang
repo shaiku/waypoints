@@ -1,0 +1,49 @@
+chetty.ui.added=Has añadido
+chetty.ui.list1=a tu lista.
+
+
+chetty.ui.removed=Has eliminado
+chetty.ui.list2=de tu lista.
+
+
+chetty.item.book.name=Compendio de Waypoints
+
+
+chetty.body.title.list=Lista de Waypoints activos
+
+
+chetty.option.title.show.all=Ubicaciones marcadas
+chetty.option.title.show.private=Ubicaciones privadas
+
+
+chetty.option.name.new=Nueva ubicación
+chetty.option.name.delete=Eliminar ubicaciones
+chetty.option.name.edit=Editar ubicaciones
+chetty.option.name.show.all=Ver todas las ubicaciones
+chetty.option.name.show.private=Ver ubicaciones privadas
+chetty.option.name.limit=Limitar ubicaciones
+chetty.option.name.select.player=Seleccione un jugador:
+chetty.option.name.select.new.limit=Seleccione un nuevo número límite§a
+chetty.option.name.set=Establecer como
+chetty.option.name.beam=Haz de luz
+chetty.option.name.public=Publico
+chetty.option.name.private=Privado
+
+
+chetty.option.tap.teleport=Toque para teletransportarse
+chetty.option.tap.delete=Toque para eliminar
+chetty.option.tap.edit=Toque para editar
+
+
+chetty.message.found.private=No se encontraron ubicaciones privadas.
+chetty.message.found.marked=No se encontraron ubicaciones marcadas.
+chetty.message.found.delete=No se encontraron ubicaciones para eliminar.
+chetty.message.found.edit=No se encontraron ubicaciones para editar.
+
+
+chetty.message.limit.reached = Ha alcanzado el límite de ubicación, puede eliminar ubicaciones innecesarias para crear otras nuevas.
+chetty.message.name.exists=El nombre ya existe, pruebe con otro.
+chetty.message.invalid.name=No se permiten espacios vacíos, pruebe con un nombre válido.
+chetty.message.changes.applied=Los cambios se han aplicado correctamente.
+chetty.message.location.deleted=La ubicación se ha eliminado correctamente.
+chetty.message.limit.updated=El límite de ubicación se ha actualizado a:

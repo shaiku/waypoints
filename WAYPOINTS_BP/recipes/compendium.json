@@ -1,0 +1,36 @@
+{
+  "format_version": "1.20.0",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "chetty:waypoint_book"
+    },
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "AB",
+      "CD"
+    ],
+    "key": {
+      "A": {
+        "item": "minecraft:compass",
+        "data": 0
+      },
+      "B": {
+        "item": "minecraft:book",
+        "data": 0
+      },
+      "C": {
+        "item": "minecraft:ink_sac",
+        "data": 0
+      },
+      "D": {
+        "item": "minecraft:ender_pearl",
+        "data": 0
+      }
+    },
+    "result": {
+      "item": "chetty:waypoint_book",
+      "count": 1
+    },
+    "priority": 1
+  }
+}

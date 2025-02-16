@@ -1,0 +1,26 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.teleport_book.idle": {
+			"loop": true,
+			"bones": {
+				"book3": {
+					"rotation": [0, "math.cos(q.anim_time * 60) * 10", 0]
+				},
+				"book4": {
+					"rotation": [0, "math.cos(q.anim_time * 60) * -10", 0]
+				}
+			}
+		},
+		"animation.teleport_book.first_person_wield": {
+			"loop": true,
+			"animation_length": 0.04167,
+			"bones": {
+				"Main": {
+					"rotation": [-70, -50, -30],
+					"position": [-2, 5, 4]
+				}
+			}
+		}
+	}
+}

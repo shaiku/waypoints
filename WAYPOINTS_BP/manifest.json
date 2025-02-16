@@ -1,0 +1,38 @@
+{
+    "format_version": 2,
+    "header": {
+        "name": "Chetty's Waypoints - v7.5",
+        "description": "By ChettyCraft [1.21.60] 'TELEPADS XD'",
+        "uuid": "493e3b35-016f-4c42-bf63-87a832d58ac6",
+        "min_engine_version": [ 1, 21, 51 ],
+        "version": [ 7, 5, 0 ]
+    },
+    "modules": [
+        {
+            "type": "script",
+            "language": "javascript",
+            "entry": "scripts/main.js",
+            "uuid": "9bc25339-af5e-465c-8ad7-9c645fb0ee1a",
+            "version": [ 2, 0, 6 ]
+        },
+        {
+            "type": "data",
+            "uuid": "84feaa40-3226-4ab1-bbfc-91bbc9a63c40",
+            "version": [ 2, 0, 6 ]
+        }
+    ],
+    "dependencies": [
+        {
+			"uuid": "674d81cc-5d05-ca69-dc85-59f6504c3df1",
+			"version": [ 7, 0, 1 ]
+		},
+        {
+            "module_name": "@minecraft/server",
+            "version": "1.13.0"
+        },
+        {
+            "module_name": "@minecraft/server-ui",
+            "version": "1.3.0"
+        }
+    ]
+}

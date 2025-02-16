@@ -1,0 +1,17 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "§lCHETTY'S WAYPOINTS§r",
+    "description": "§lVERSION: 7.0\n§lBY §6O CHETTY O",
+    "uuid": "674d81cc-5d05-ca69-dc85-59f6504c3df1",
+    "version": [ 7, 0, 1 ],
+    "min_engine_version": [ 1, 21, 51 ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "7ad2175c-f19c-dcb2-b953-03cfe578186d",
+      "version": [ 7, 0, 1 ]
+    }
+  ]
+}

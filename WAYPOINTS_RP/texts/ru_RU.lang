@@ -1,0 +1,22 @@
+## ТЕКСТОВЫЙ ИНТЕРФЕЙС ##
+
+chetty.option.name.set=Установить как
+chetty.option.name.beam=Световой луч
+chetty.option.name.public=Публичный
+chetty.option.name.private=Частный
+chetty.ui.entity.invalid.name=Имя уже существует, попробуйте другое.
+chetty.item.book.name=Компендиум маршрутных точек
+
+## ВЫВОД-КОМАНДА-СОЗДАНО-УДАЛЕНО ##
+
+chetty.ui.list.empty=Список путевых точек пуст.
+
+chetty.ui.added=Вы добавили
+chetty.ui.list1=в свой список.
+
+chetty.ui.removed=Вы удалили
+chetty.ui.list2=из своего списка.
+chetty.ui.limit.message=Ваш лимит маршрутных точек обновлен
+chetty.ui.changes=Изменения применены успешно.
+
+chetty.ui.limit=Вы достигли предела!

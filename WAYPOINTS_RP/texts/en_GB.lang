@@ -1,0 +1,49 @@
+chetty.ui.added=You have added
+chetty.ui.list1=To your list.
+
+
+chetty.ui.removed=You have deleted
+chetty.ui.list2=From your list.
+
+
+chetty.item.book.name=Waypoints Compendium
+
+
+chetty.body.title.list=List of active Waypoints
+
+
+chetty.option.title.show.all=Marked locations
+chetty.option.title.show.private=Private locations
+
+
+chetty.option.name.new=New location
+chetty.option.name.delete=Delete locations
+chetty.option.name.edit=Edit locations
+chetty.option.name.show.all=See all locations
+chetty.option.name.show.private=View private locations
+chetty.option.name.limit=Limit locations
+chetty.option.name.select.player=Select a player:
+chetty.option.name.select.new.limit=Select a new limit number§a
+chetty.option.name.set=Set As
+chetty.option.name.beam=Light Beam
+chetty.option.name.public=Public
+chetty.option.name.private=Private
+
+
+chetty.option.tap.teleport=Tap to teleport
+chetty.option.tap.delete=Tap to delete
+chetty.option.tap.edit=Tap to edit
+
+
+chetty.message.found.private=No private locations found.
+chetty.message.found.marked=No marked locations found.
+chetty.message.found.delete=No locations found to delete.
+chetty.message.found.edit=No locations found to edit.
+
+
+chetty.message.limit.reached=You have reached the location limit, you can delete unnecessary locations to create new ones.
+chetty.message.name.exists=The name already exists, try another one.
+chetty.message.invalid.name=No empty spaces allowed, try a valid name.
+chetty.message.changes.applied=Changes have been successfully applied.
+chetty.message.location.deleted=The location has been successfully deleted.
+chetty.message.limit.updated=The location limit has been updated to:
