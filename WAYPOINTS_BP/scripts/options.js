@@ -21,9 +21,11 @@ import {
    generateRandomName
 } from "./functions";
 
+import { enqueueTeleportation } from "./main";
+
 let entityTag;
 
-export function waypoint_main_manu(source, entities) {
+export function waypoint_main_menu(source, entities) {
    const waypointTags = {
       "waypointName": [],
       "waypointOwner": []
@@ -50,15 +52,12 @@ export function waypoint_main_manu(source, entities) {
                waypoint_menu_show_all(source, entities);
                break;
             default:
-               const entity = entities.find(entity => entity.hasTag(waypointTags['waypointName'][selection - 2]));
-               if (entity) {
-                  const jsonTag = {
-                     'teleport': {
-                        'location': waypointTags['waypointName'][selection - 2]
-                     }
-                  };
-                  source.addTag("is_teleported");
-                  source.addTag(JSON.stringify(jsonTag));
+               if (typeof selection === "number") {
+                  const tag = waypointTags['waypointName'][selection - 2];
+                  const entity = entities.find(entity => entity.hasTag(tag));
+                  if (entity) {
+                     enqueueTeleportation(source, entity, tag);
+                  }
                }
                break;
          }
@@ -112,44 +111,35 @@ function waypoints_menu_options(source, entities) {
             waypoint_menu_operator_option(source, entities);
             break;
          default:
-            waypoint_main_manu(source, entities);
+            waypoint_main_menu(source, entities);
             break
       }
    });
 }
 
 function waypoint_menu_show_all(source, entities) {
-   const waypointTags = {
-      "waypointName": [],
-      "waypointOwner": []
-   };
+   const waypoints = [];
    entities.forEach(entity => {
       entity.getTags().forEach(tag => {
          if (tag.startsWith('{"waypoint":{') && !tag.startsWith('"')) {
             const waypointData = JSON.parse(tag);
-            waypointTags["waypointName"].push(waypointData['waypoint']['Name']);
+            waypoints.push({ 'name': waypointData['waypoint']['Name'], 'entity': entity, 'tag': tag });
          }
       });
    });
    const waypointShowAll = new ActionFormData()
       .title("§l§c◤ %chetty.option.title.show.all ◢")
-      .body(`§e◈ %chetty.body.title.list:§r§c ${waypointTags["waypointName"].length}`);
-   waypointTags["waypointName"].forEach(waypointName => waypointShowAll.button(`§0§l${waypointName}§r\n${text5}`, "textures/icon/ic_waypoint"));
-   if (!waypointTags['waypointName'].length) {
+      .body(`§e◈ %chetty.body.title.list:§r§c ${waypoints.length}`);
+   waypoints.forEach(wp => waypointShowAll.button(`§0§l${wp['name']}§r\n${text5}`, "textures/icon/ic_waypoint"));
+   if (!waypoints.length) {
       message(source, "§c%chetty.message.found.marked");
       return;
    }
    waypointShowAll.show(source).then(({ selection, canceled }) => {
       if (!canceled) {
-         const jsonTag = {
-            'teleport': {
-               'location': waypointTags['waypointName'][selection]
-            }
-         };
-         source.addTag("is_teleported");
-         source.addTag(JSON.stringify(jsonTag));
+         enqueueTeleportation(source, waypoints[selection]['entity'], waypoints[selection]['tag']);
       } else {
-         waypoint_main_manu(source, entities);
+         waypoint_main_menu(source, entities);
       }
    });
 }
@@ -370,7 +360,7 @@ function waypoint_menu_operator_option(source, entities) {
             waypoint_menu_operator_option_0(source, entities);
             break;
          case 1:
-            waypoint_menu_operator_option_1(source);
+            waypoint_menu_operator_option_1(source, entities);
             break;
          case 2:
             waypoint_menu_operator_option_2(source, entities);
@@ -439,7 +429,7 @@ function waypoint_menu_operator_option_1(source, entities) {
                   target.removeTag(limitTag);
                   target.addTag(JSON.stringify(jsonTag));
                   message(target, `§a%chetty.message.limit.updated ${limit}`);
-                  waypoint_menu_operator_option_1(source);
+                  waypoint_menu_operator_option_1(source, entities);
                }
             }
          });
@@ -449,73 +439,30 @@ function waypoint_menu_operator_option_1(source, entities) {
    });
 }
 
+// Show Private Waypoints
 function waypoint_menu_operator_option_2(source, entities) {
-   const hiddenNames = [];
+   const privateWPs = [];
    entities.forEach(entity => {
       let hasWaypointTag = entity.getTags().some(tag => tag.startsWith('{"waypoint":{'));
       if (!hasWaypointTag) {
          entity.getTags().forEach(tag => {
             if (!tag.startsWith('{"player":{') && !tag.startsWith('"')) {
-               hiddenNames.push(tag);
+               privateWPs.push({ 'name': tag, 'entity': entity });
             }
          });
       }
    });
    const waypointShowAlls = new ActionFormData()
       .title("§l§c◤ %chetty.option.title.show.private ◢")
-      .body(`§e◈ %chetty.body.title.list:§r§c ${hiddenNames.length}`);
-   hiddenNames.forEach(name => waypointShowAlls.button(`§0§l${name}§r\n${text5}`, "textures/icon/ic_waypoint"));
-   if (!hiddenNames.length) {
+      .body(`§e◈ %chetty.body.title.list:§r§c ${privateWPs.length}`);
+   privateWPs.forEach(wp => waypointShowAlls.button(`§0§l${wp['name']}§r\n${text5}`, "textures/icon/ic_waypoint"));
+   if (!privateWPs.length) {
       message(source, "§c%chetty.message.found.private");
       return;
    }
    waypointShowAlls.show(source).then(({ selection, canceled }) => {
       if (!canceled) {
-         const jsonTag = {
-            'teleport': {
-               'location': waypointTags['waypointName'][selection]
-            }
-         };
-         source.addTag("is_teleported");
-         source.addTag(JSON.stringify(jsonTag));
+         enqueueTeleportation(source, privateWPs[selection]['entity'], privateWPs[selection]['name']);
       } else { waypoint_menu_operator_option(source, entities); }
    });
 }
-
-system.runInterval(() => {
-   world.getAllPlayers().forEach(plr => {
-      if (!plr.hasTag("is_teleported")) return;
-      plr.getTags().forEach(tag => {
-         if (tag.startsWith('{"teleport":{')) {
-            const teleportData = JSON.parse(tag);
-            entityTag = teleportData['teleport']['location'];
-         }
-      });
-      let timeLeft = 3;
-      plr.runCommandAsync(`camera "${plr.nameTag}" fade time 1 1 1`);
-      plr.runCommandAsync(`effect "${plr.nameTag}" invisibility 1 1 true`);
-      plr.runCommandAsync(`effect "${plr.nameTag}" resistance 1 255 true`);
-      plr.teleport({ x: plr.location.x, y: plr.location.y, z: plr.location.z });
-      if (!plr.hasTag("timer_set")) {
-         plr.addTag("timer_set");
-         const intervalID = system.runInterval(() => {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            const formattedTime = `${minutes.toString().padStart(2, "0")}:` + `${seconds.toString().padStart(2, "0")}`;
-            plr.runCommandAsync(`title "${plr.nameTag}" actionbar ${formattedTime}`);
-            plr.playSound("random.orb");
-            timeLeft--;
-            if (timeLeft < 0) {
-               const findJsonTag = { 'teleport': { 'location': entityTag } };
-               plr.removeTag("timer_set");
-               system.clearRun(intervalID);
-               plr.removeTag("is_teleported");
-               plr.runCommandAsync(`tp "${plr.nameTag}" @e[tag="${entityTag}"]`);
-               plr.runCommandAsync(`event entity @e[tag="${entityTag}"] particle`);
-               plr.removeTag(JSON.stringify(findJsonTag));
-               plr.playSound("mob.shulker.teleport");
-            }
-         }, 20);
-      }
-   });
-}, 0);
